@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- deployment.yaml
+- service.yaml
+- configmap.yaml
+
+# Common labels added to ALL resources automatically
+
+# Common annotations
+commonAnnotations:
+  project: kustomize-capstone
+  team: devops
+
+# Image transformer - change image tag easily
+images:
+- name: nginx
+  newTag: "1.25"
+labels:
+- includeSelectors: true
+  pairs:
+    app: web-app
+    managed-by: kustomize

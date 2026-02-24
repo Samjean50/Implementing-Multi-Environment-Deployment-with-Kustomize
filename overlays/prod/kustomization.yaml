@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+
+namePrefix: prod-
+
+patches:
+- path: replica-patch.yaml
+
+namespace: prod
+
+secretGenerator:
+- envs:
+  - secrets.env
+  name: web-app-secrets
+
+configMapGenerator:
+- behavior: merge
+  literals:
+  - LOG_LEVEL=warn
+  - APP_ENV=production
+  name: web-app-config

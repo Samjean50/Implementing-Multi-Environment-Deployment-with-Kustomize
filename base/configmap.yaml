@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-app-config
+data:
+  APP_NAME: "web-app"
+  LOG_LEVEL: "info"
